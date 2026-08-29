@@ -1,5 +1,5 @@
 import os
-from langchain_community.document_loaders import DirectoryLoader, TextLoader
+from langchain_community.document_loaders import DirectoryLoader, TextLoader, CSVLoader
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_ollama import OllamaEmbeddings
 from langchain_chroma import Chroma
@@ -17,15 +17,26 @@ def build_or_get_retriever(data_folder="./data", persist_directory="./chroma_db"
         )
     else:
         print(f"Loading documents from directory: {data_folder}...")
-        # DirectoryLoader loads all matching files from the target directory
-        loader = DirectoryLoader(
+        
+        # Load standard text/markdown files
+        text_loader = DirectoryLoader(
             data_folder,
-            glob="**/*.txt",  # Adjust pattern (e.g. "**/*.*") for multi-format setups
+            glob="**/*.txt",
             loader_cls=TextLoader,
             loader_kwargs={"encoding": "utf-8"}
         )
-        documents = loader.load()
-        print(f"Loaded {len(documents)} document(s).")
+        
+        # Load CSV files using CSVLoader
+        csv_loader = DirectoryLoader(
+            data_folder,
+            glob="**/*.csv",
+            loader_cls=CSVLoader,
+            loader_kwargs={"encoding": "utf-8"}
+        )
+
+        # Execute loading for all file types
+        documents = text_loader.load() + csv_loader.load()
+        print(f"Loaded {len(documents)} document record(s).")
 
         # 3. Apply Semantic Chunking based on embedding distance breaks
         print("Splitting documents semantically...")
