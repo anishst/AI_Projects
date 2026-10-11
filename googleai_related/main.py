@@ -3,6 +3,7 @@
 # Interactions API
 import os
 from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 
 # Load environment variables from the .env file
@@ -10,11 +11,21 @@ load_dotenv()
 
 # Initialize the client (it automatically detects GEMINI_API_KEY from your environment)
 client = genai.Client()
+# cient = genai.Client(api_key=os.getenv("GEMINI_API_KEY")) # directly specify the API key if you prefer
 
 # Generate text content
+# response = client.models.generate_content(
+#     model='gemini-3.8-flash',
+#     contents='Give me a 3-item checklist for launching a Python project.',
+# )
+
+# Generate text content with system instructions
 response = client.models.generate_content(
     model='gemini-3.8-flash',
     contents='Give me a 3-item checklist for launching a Python project.',
+    config={
+        'system_instruction': 'You are a senior software engineering lead who emphasizes testing and documentation.'
+    }
 )
 
 # Print the result

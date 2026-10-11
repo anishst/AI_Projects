@@ -1,10 +1,4 @@
 
-# Testing Ollama and Langchain
+AI Projects
 
-[Guide](https://codecut.ai/private-ai-workflows-langchain-ollama/)
-
-[Download Ollama](https://ollama.com/download)
-- Pull models: ```ollama pull qwen3:0.6b```
-- serv model: ```ollama run qwen3:0.6b```
-
-
+A dedicated testing ground for evaluating state-of-the-art AI models and integration APIs
