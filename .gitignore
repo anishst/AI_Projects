@@ -9,3 +9,4 @@ wheels/
 # Virtual environments
 .venv
 local_rag_llm/chrome_langchain_db/
+.env
