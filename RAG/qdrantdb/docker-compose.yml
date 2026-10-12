@@ -1,5 +1,6 @@
 #  docker compose up -d
 # https://qdrant.tech/documentation/
+# Dashboard: http://localhost:6333/dashboard#/collections
 services:
   vector-db:
     image: qdrant/qdrant
