@@ -1,5 +1,6 @@
 
 [Docs](https://docs.openwebui.com/getting-started/quick-start)
+[Ollama Docker](https://docs.ollama.com/docker)
 
 Docker command to run open-webui:
 
